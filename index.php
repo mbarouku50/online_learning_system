@@ -1,43 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- font awesome css -->
-    <link rel="stylesheet" href="css/all.min.css">
+<!-- start including header -->
+<?php
+include("./templates/header.php");
+?>
+<!-- end including header -->
 
-    <!-- google-font -->
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
-    <!-- custom css -->
-    <link rel="stylesheet" href="css/style.css">
-    <title>CBE-E-LEARNING</title>
-</head>
-<body>
-<!-- start navigation     -->
-<nav class="navbar navbar-expand-sm navbar-dark bg-blue p1-5 fixed-top">
-    <a class="navbar-brand" href="index.php">CBE</a>
-    <span class="navbar-text">online-leaning</span>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <ul class="navbar-nav custom-nav p1-5">
-        <li class="nav-item custom-nav-item"><a href="index.php" class="nav-link">Home</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">courses</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">payment</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">My Profile</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">Logout</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">Login</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">Signup</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">Feedback</a></li>
-        <li class="nav-item custom-nav-item"><a href="#" class="nav-link">Contact</a></li>
-     </ul>
-    </div>
-</nav>
- <!-- end navigation     -->
 
  <!-- start video background -->
   <div class="container-fluid remove-vid-marg">
@@ -50,7 +16,8 @@
     <div class="vid-content">
       <h1 class="my-content">Welcome to CBE online-learning</h1>
       <small class="my-content">Learn and Implement</small><br>
-      <a href="#" class="btn btn-primary">Get Started</a>
+
+      <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studRegModalCenter">Get Started</a>
     </div>
   </div>
   <!-- end video background -->
@@ -74,6 +41,8 @@
   </div>
 
    <!-- end text banner -->
+
+
   <!-- start most popular course -->
    <div class="container mt-5">
     <h1 class="text-center">popular course</h1>
@@ -175,30 +144,9 @@
   <!-- end most popular course -->
 
   <!-- start contact us -->
-   <div class="container" id="contact">
-    <h2 class="text-center mb-4">Contact Us</h2>
-      <div class="row">
-        <div class="col-md-8">
-          <form action="#" method="post">
-            <input type="text" class="form-control" name="name" placeholder="Name"><br>
-            <input type="text" class="form-control" name="subject" placeholder="subject"><br>
-            <input type="email" class="form-control" name="email" placeholder="Email"><br>
-            <textarea class="form-control" name="message" placeholder="How can we help you?" style="height: 150px;;"></textarea><br>
-            <input class="btn btn-primary" type="submit" value="send" name="submit"><br><br>
-          </form>
-        </div>
-        <div class="col-md-4 stripe text-white text-center">
-          <h4>Online learning</h4>
-          <p>CBE,
-          Bibi Titi Mohamed Rd. 
-          P. O. Box 1968, 
-          Dar es Salaam.<br>
-          phone:  +255627841861
-          www.cbe.ac.tz
-          </p>
-        </div>
-      </div>
-   </div>
+    <?php
+    include("contact.php")
+    ?>
    <!-- end contact us -->
 
     <!-- start student Testimonial -->
@@ -315,19 +263,8 @@
      </div>
      <!-- end about section -->
 
-     <!-- start footer -->
-      <footer class="container-fluid bg-blue text-center p-2">
-        <small class="text-white">Copyright &copy; 2025 || Designed By m_boy || Admin</small>
-      </footer>
-     <!-- end footer -->
-
-<!-- jquery and bootstrap javascript -->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-<!-- font awesome js -->
-<script src="js/all.min.js"></script>
-<!-- Initialize Owl Carousel -->
-</body>
-</html>
+     <!-- start include footer -->
+  <?php
+    include("./templates/footer.php");
+  ?>
+    <!-- end include footer -->
