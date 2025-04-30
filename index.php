@@ -17,7 +17,14 @@ include("./templates/header.php");
       <h1 class="my-content">Welcome to CBE online-learning</h1>
       <small class="my-content">Learn and Implement</small><br>
 
-      <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studRegModalCenter">Get Started</a>
+      <?php
+        if(!isset($_SESSION['is_login'])){
+          echo'<a href="#" class="btn btn-primary mt-3" data-bs-toggle="modal" 
+          data-bs-target="#studRegModalCenter">Get Started</a>';
+        } else{
+          echo '<a href="#" class="btn btn-primary mt-3">My Profile</a>';
+        }
+      ?>
     </div>
   </div>
   <!-- end video background -->
