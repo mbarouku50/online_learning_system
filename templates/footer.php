@@ -1,160 +1,475 @@
-<!-- start footer -->
-<footer class="container-fluid bg-blue text-center p-2">
-        <small class="text-white">Copyright &copy; 2025 || Designed By m_boy || 
-          <a href="#login" data-bs-toggle="modal" data-bs-target="#adminLoginModalCenter">Admin Login</a></small>
-      </footer>
-     <!-- end footer -->
+<style>
+    /* Footer Styles */
+    .main-footer {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 2rem 0;
+        font-size: 0.9rem;
+    }
+    
+    .footer-copyright {
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .footer-link {
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    
+    .footer-link:hover {
+        color: white;
+        text-decoration: underline;
+    }
+    
+    /* Modal Styles */
+    .modal-content {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    
+    .modal-header {
+        background: var(--primary-color);
+        color: white;
+        border-bottom: none;
+        padding: 1.5rem;
+    }
+    
+    .modal-title {
+        font-weight: 600;
+    }
+    
+    .modal-body {
+        padding: 2rem;
+    }
+    
+    .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group i {
+        position: absolute;
+        top: 38px;
+        left: 15px;
+        color: var(--primary-color);
+    }
+    
+    .form-control {
+        padding-left: 40px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        height: 50px;
+    }
+    
+    .form-control:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+    }
+    
+    .btn-modal-primary {
+        background-color: var(--primary-color);
+        border: none;
+        padding: 10px 25px;
+        font-weight: 500;
+    }
+    
+    .btn-modal-primary:hover {
+        background-color: var(--secondary-color);
+    }
+    
+    .form-text {
+        color: #6c757d;
+        font-size: 0.8rem;
+    }
+    
+    .switch-modal-link {
+        color: var(--primary-color);
+        font-weight: 500;
+        cursor: pointer;
+    }
+    
+    .switch-modal-link:hover {
+        text-decoration: underline;
+    }
+    
+    #statusRegMsg, #statusStudLogMsg, #statusadminLogMsg {
+        font-weight: 500;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+</style>
 
-
-      <!-- start student registration modal -->
-<div class="modal fade" id="studRegModalCenter" tabindex="-1" aria-labelledby="studRegModalCenterLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="studRegModalCenterLabel">Student registration</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- start student registration form -->
-      <form>
-  <div class="form-group">
-    <i class="fas fa-user"></i>
-    <label for="studname" class="pl-2 font-weight-bold">Name</label>
-    <input type="text" class="form-control" placeholder="Name" name="studname" id="studname">
-  </div>
-  <div class="form-group">
-    <i class="fas fa-user"></i>
-    <label for="studreg" class="pl-2 font-weight-bold">Reg No.</label>
-    <input type="text" class="form-control" placeholder="Reg no." name="studreg" id="studreg">
-  </div>
-  <div class="form-group">
-    <i class="fas fa-envelope"></i>
-    <label for="stuemail" class="pl-2 font-weight-bold">Email</label>
-    <input type="email" class="form-control" placeholder="Email" name="stuemail" id="stuemail">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="form-group">
-    <i class="fas fa-key"></i>
-    <label for="stupass" class="pl-2 font-weight-bold">New password</label>
-    <input type="password" class="form-control" placeholder="password" name="stupass" id="stupass">
-   
-  </div>
-</form>
-<!-- end student registration form -->
-      </div>
-      <div class="modal-footer">
-        <span id="successMsg"></span>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="addstu()">sign up</button>
-      </div>
+<!-- Footer -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+                <small>&copy; 2025 CBE E-Learning. All rights reserved.</small>
+            </div>
+            <div class="col-md-6 text-md-end text-center">
+                <small>Designed by <a href="#" class="footer-link">m_boy</a> | 
+                <a href="#" class="footer-link" data-bs-toggle="modal" data-bs-target="#adminLoginModalCenter">Admin Login</a></small>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-       <!-- end student registration modal -->
+</footer>
 
-
-       <!-- start student login modal -->
-<div class="modal fade" id="studLoginModalCenter" tabindex="-1" 
-aria-labelledby="studLoginModalCenterLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="studLoginModalCenterLabel">Student Login</h1>
-        <button type="button" class="btn-close" 
-        data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- start student login form -->
-      <form id="stuLoginForm">
-  <div class="form-group">
-    <i class="fas fa-envelope"></i>
-    <label for="stuLogemail" class="pl-2 font-weight-bold">Email</label>
-    <input type="email" class="form-control" placeholder="Email" 
-    name="stuLogemail" id="stuLogemail" required>
-  </div>
-  <div class="form-group">
-    <i class="fas fa-key"></i>
-    <label for="stuLogpass" class="pl-2 font-weight-bold">password</label>
-    <input type="password" class="form-control" placeholder="password" 
-    name="stuLogpass" id="stuLogpass" required>
-  </div>
-
-</form>
-<div class="text-center mt-3">
- <p>Don't have an account? <a href="#" data-bs-toggle="modal" 
- data-bs-target="#registerModal">Register here</a></p>
- </div>
-<!-- end student login form -->
-      </div>
-      <div class="modal-footer">
-      <div id="statusLogMsg" class="mb-3"></div>
-        <button type="button" class="btn btn-secondary" 
-        data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" 
-        id="stuLoginBtn" onclick="checkStuLogin()">Login</button>
-      </div>
+<!-- Student Registration Modal -->
+<div class="modal fade" id="studRegModalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Student Registration</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="studRegForm">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <label for="studname" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" placeholder="Enter your full name" name="studname" id="studname" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-id-card"></i>
+                        <label for="studreg" class="form-label">Registration Number</label>
+                        <input type="text" class="form-control" placeholder="Enter your registration number" name="studreg" id="studreg" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <label for="stuemail" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Enter your email" name="stuemail" id="stuemail" required>
+                        <div class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <label for="stupass" class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Create a password" name="stupass" id="stupass" required>
+                    </div>
+                    <div id="statusRegMsg"></div>
+                    <div class="text-center mt-3">
+                        <p> have an account? <a href="#" class="switch-modal-link" data-bs-toggle="modal" data-bs-target="#studLoginModalCenter" data-bs-dismiss="modal">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-modal-primary" onclick="addstu()">Register</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-       <!-- end student login modal -->
 
-
-       <!-- start Admin login modal -->
-<div class="modal fade" id="adminLoginModalCenter" tabindex="-1" 
-aria-labelledby="adminLoginModalCenterLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" 
-        id="adminLoginModalCenterLabel">Admin Login</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" 
-        aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- start admin login form -->
-      <form id="adminLoginForm">
-  <div class="form-group">
-    <i class="fas fa-envelope"></i>
-    <label for="adminLogemail" class="pl-2 font-weight-bold">Email</label>
-    <input type="email" class="form-control" placeholder="Email" 
-    name="adminLogemail" id="adminLogemail">
-  
-  </div>
-  <div class="form-group">
-    <i class="fas fa-key"></i>
-    <label for="adminLogpass" class="pl-2 font-weight-bold">password</label>
-    <input type="password" class="form-control" placeholder="password" 
-    name="adminLogpass" id="adminLogpass">
-  </div>
-</form>
-<!-- end admin login form -->
-      </div>
-      <div class="modal-footer">
-      <div id="statusadminLogMsg" class="mb-3"></div>
-        <button type="button" class="btn btn-secondary" 
-        data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" 
-        id="adminLoginBtn" onclick="checkAdminLogin()">Login</button>
-      </div>
+<!-- Student Login Modal -->
+<div class="modal fade" id="studLoginModalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Student Login</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="stuLoginForm">
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <label for="stuLogemail" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Enter your email" name="stuemail" id="stuLogemail" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <label for="stuLogpass" class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Enter your password" name="stupass" id="stuLogpass" required>
+                    </div>
+                    <div class="text-end mb-3">
+                        <a href="#" class="switch-modal-link" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">Forgot Password?</a>
+                    </div>
+                    <div id="statusStudLogMsg"></div>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="#" class="switch-modal-link" data-bs-toggle="modal" data-bs-target="#studRegModalCenter" data-bs-dismiss="modal">Register here</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-modal-primary" id="stuLoginBtn" onclick="checkStudLogin()">Login</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-       <!-- end Admin login modal -->
+
+<!-- Admin Login Modal -->
+<div class="modal fade" id="adminLoginModalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Admin Login</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <label for="admin_email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Enter admin email" name="admin_email" id="admin_email" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <label for="admin_pass" class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Enter password" name="admin_pass" id="admin_pass" required>
+                    </div>
+                    <div class="text-end mb-3">
+                        <a href="#" class="switch-modal-link" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">Forgot Password?</a>
+                    </div>
+                    <div id="statusadminLogMsg"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-modal-primary" id="adminLoginBtn" onclick="checkAdminLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reset Password</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="forgotPasswordForm">
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <label for="resetEmail" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Enter your registered email" name="resetEmail" id="resetEmail" required>
+                        <div class="form-text">We'll send a password reset link to this email.</div>
+                    </div>
+                    <div id="statusForgotPassMsg"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-modal-primary" onclick="sendResetLink()">Send Reset Link</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reset Password Modal -->
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Password</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="resetPasswordForm">
+                    <input type="hidden" id="resetToken" name="resetToken">
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" placeholder="Enter new password" name="newPassword" id="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" placeholder="Confirm new password" name="confirmPassword" id="confirmPassword" required>
+                    </div>
+                    <div id="statusResetPassMsg"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-modal-primary" onclick="updatePassword()">Update Password</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Local JS Files - Fixed Paths -->
+<script src="js/ajaxrequest.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/adminajaxrequest.js"></script>
+
+<script>
+    // Ensure jQuery is loaded before executing
+    $(document).ready(function(){
+        // Make modals draggable
+        $('.modal').draggable({
+            handle: ".modal-header"
+        });
+        
+        // Switch between login and register modals
+        $('.switch-modal-link').click(function(){
+            var targetModal = $(this).attr('data-bs-target');
+            $('.modal').modal('hide');
+            $(targetModal).modal('show');
+        });
+    });
+
+    // Carousel initialization
+    document.addEventListener('DOMContentLoaded', function() {
+        var myCarousel = document.getElementById('feedbackCarousel');
+        if(myCarousel) {
+            var carousel = new bootstrap.Carousel(myCarousel, {
+                interval: 3000,
+                pause: 'hover'
+            });
+        }
+    });
 
 
-<!-- jquery and bootstrap javascript -->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 
-<!-- font awesome js -->
-<script src="js/all.min.js"></script>
-<!-- Initialize Owl Carousel -->
 
-<!-- student Ajax call js -->
-<script type="text/javascript" src="js/ajaxrequest.js"></script>
+    //////////////////////////mmm
+    function sendResetLink() {
+    const email = $('#resetEmail').val().trim();
+    
+    if(!email) {
+        $('#statusForgotPassMsg').html('<div class="alert alert-danger">Please enter your email address</div>');
+        return;
+    }
+    
+    $('#statusForgotPassMsg').html('<div class="alert alert-info">Sending reset link...</div>');
+    
+    $.ajax({
+        url: 'php/forgot_password.php',
+        type: 'POST',
+        data: { email: email },
+        success: function(response) {
+            try {
+                const data = JSON.parse(response);
+                if(data.status === 'success') {
+                    $('#statusForgotPassMsg').html(`<div class="alert alert-success">${data.message}</div>`);
+                    // For testing, show the demo link (remove in production)
+                    if(data.demo_reset_link) {
+                        $('#statusForgotPassMsg').append(`<div class="mt-2"><small>Demo link: <a href="${data.demo_reset_link}" target="_blank">${data.demo_reset_link}</a></small></div>`);
+                    }
+                    setTimeout(() => {
+                        $('#forgotPasswordModal').modal('hide');
+                    }, 3000);
+                } else {
+                    $('#statusForgotPassMsg').html(`<div class="alert alert-danger">${data.message}</div>`);
+                }
+            } catch(e) {
+                $('#statusForgotPassMsg').html('<div class="alert alert-danger">Error processing request</div>');
+            }
+        },
+        error: function() {
+            $('#statusForgotPassMsg').html('<div class="alert alert-danger">Failed to send reset link. Please try again.</div>');
+        }
+    });
+}
 
-<!-- Admin Ajax call js -->
-<script type="text/javascript" src="js/adminajaxrequest.js"></script>
+function updatePassword() {
+    const newPassword = $('#newPassword').val();
+    const confirmPassword = $('#confirmPassword').val();
+    const token = $('#resetToken').val();
+    
+    if(newPassword !== confirmPassword) {
+        $('#statusResetPassMsg').html('<div class="alert alert-danger">Passwords do not match</div>');
+        return;
+    }
+    
+    if(newPassword.length < 6) {
+        $('#statusResetPassMsg').html('<div class="alert alert-danger">Password must be at least 6 characters</div>');
+        return;
+    }
+    
+    $('#statusResetPassMsg').html('<div class="alert alert-info">Updating password...</div>');
+    
+    $.ajax({
+        url: 'php/reset_password.php',
+        type: 'POST',
+        data: { 
+            token: token,
+            password: newPassword,
+            confirm_password: confirmPassword
+        },
+        success: function(response) {
+            try {
+                const data = JSON.parse(response);
+                if(data.status === 'success') {
+                    $('#statusResetPassMsg').html(`<div class="alert alert-success">${data.message}</div>`);
+                    setTimeout(() => {
+                        $('#resetPasswordModal').modal('hide');
+                        // Show appropriate login modal
+                        if(window.location.pathname.includes('admin')) {
+                            $('#adminLoginModalCenter').modal('show');
+                        } else {
+                            $('#studLoginModalCenter').modal('show');
+                        }
+                    }, 2000);
+                } else {
+                    $('#statusResetPassMsg').html(`<div class="alert alert-danger">${data.message}</div>`);
+                }
+            } catch(e) {
+                $('#statusResetPassMsg').html('<div class="alert alert-danger">Error processing request</div>');
+            }
+        },
+        error: function() {
+            $('#statusResetPassMsg').html('<div class="alert alert-danger">Failed to update password. Please try again.</div>');
+        }
+    });
+}
+
+// Check URL for token on page load
+function checkForPasswordResetToken() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    
+    if(token) {
+        // Verify token first
+        $.ajax({
+            url: 'php/verify_token.php?token=' + token,
+            type: 'GET',
+            success: function(response) {
+                try {
+                    const data = JSON.parse(response);
+                    if(data.status === 'success') {
+                        $('#resetToken').val(token);
+                        $('#resetPasswordModal').modal('show');
+                        // Clean the URL
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    } else {
+                        alert('Invalid or expired token');
+                    }
+                } catch(e) {
+                    alert('Error processing token');
+                }
+            },
+            error: function() {
+                alert('Failed to verify token');
+            }
+        });
+    }
+}
+
+// Call this on page load
+$(document).ready(function() {
+    checkForPasswordResetToken();
+    
+    // Add forgot password links to your login modals
+    $('.login-modal').each(function() {
+        $(this).find('.modal-body').append(`
+            <div class="text-end mb-3">
+                <a href="#" class="switch-modal-link" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">Forgot Password?</a>
+            </div>
+        `);
+    });
+});
+</script>
+
+
 </body>
 </html>

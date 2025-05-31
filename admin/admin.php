@@ -10,14 +10,14 @@ try {
     if (isset($_POST['checkLogemail'])) {
         include_once(__DIR__ . '/../dbconnection.php');
         
-        if (empty($_POST['adminLogemail']) || empty($_POST['adminLogpass'])) {
+        if (empty($_POST['admin_email']) || empty($_POST['admin_pass'])) {
             $response["message"] = "Email and password are required";
             echo json_encode($response);
             exit();
         }
 
-        $adminLogemail = $_POST['adminLogemail'];
-        $password = $_POST['adminLogpass'];
+        $admin_email = $_POST['admin_email'];
+        $password = $_POST['admin_pass'];
 
         $stmt = $conn->prepare("SELECT admin_id, admin_email, admin_pass FROM admin WHERE admin_email = ?");
         
@@ -27,7 +27,7 @@ try {
             exit();
         }
 
-        $stmt->bind_param("s", $adminLogemail);
+        $stmt->bind_param("s", $admin_email);
         $stmt->execute();
         $result = $stmt->get_result();
         

@@ -3,9 +3,6 @@
     src: url('/webfonts/fa-solid-900.woff2') format('woff2');
     /* other formats as needed */
   }
-.navbar {
-    background-color: rgb(18, 18, 107);
-}
 .navbar-brand{
     font-family: "Ubuntu", sans-serif;
     font-size: 2em;
@@ -28,31 +25,6 @@
 .remove-vid-marg{
     margin: 0px;
     padding: 0px;
-}
-.vid-parent{
-    position: relative;
-}
-video{
-    width: 100%;
-    height: 90%;
-}
-.vid-overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #225470;
-    z-index: 1;
-    opacity: 0.8;
-}
-.vid-content{
-    position: absolute;
-    z-index: 2;
-    top: 35%;
-    left: 35%;
-    text-align: center;
-    color: #fff;
 }
 .bottom-banner{
     color: #fff;

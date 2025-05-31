@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- font awesome css -->
-    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="../css/all.min.css">
     <!-- google-font -->
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <!-- custom css -->
-    <link rel="stylesheet" href="../css/adminstyle.css">
+    <link rel="stylesheet" href="../css/adminstyle1.css">
 
 </head>
 <body>
@@ -44,37 +44,43 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                        <a class="nav-link" href="books.php">
+                            <i class="fas fa-book"></i> <!-- Changed icon to book -->
+                            Books Management
+                        </a>
+                        </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="lessons.php">
                                 <i class="fab fa-accessible-icon"></i>
                                 Lessons
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="student.php">
                                 <i class="fas fa-users"></i>
                                 Students
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="adminSellReport.php">
                                 <i class="fas fa-table"></i>
                                 Sell Report
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="adminPaymentStatus.php">
                                 <i class="fas fa-table"></i>
                                 Payment Status
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="feedback.php">
                                 <i class="fab fa-accessible-icon"></i>
                                 Feedback
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="adminChangePassword.php">
                                 <i class="fas fa-key"></i>
                                 change password
                             </a>

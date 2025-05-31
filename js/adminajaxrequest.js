@@ -1,12 +1,12 @@
 function checkAdminLogin() {
-    const adminLogemail = $("#adminLogemail").val().trim();
-    const adminLogpass = $("#adminLogpass").val();
+    const admin_email = $("#admin_email").val().trim();
+    const admin_pass = $("#admin_pass").val();
     
     // Clear previous messages
     $("#statusAdminLogMsg").empty();
     
     // Validate inputs
-    if (!adminLogemail || !adminLogpass) {
+    if (!admin_email || !admin_pass) {
         showLoginMessage('Email and password are required', 'danger');
         return;
     }
@@ -21,8 +21,8 @@ function checkAdminLogin() {
         dataType: "json",
         data: {
             checkLogemail: "checkLogemail",
-            adminLogemail: adminLogemail,
-            adminLogpass: adminLogpass,
+            admin_email: admin_email,
+            admin_pass: admin_pass,
         },
         success: function(data) {
             if (data.status === "success") {
