@@ -242,7 +242,12 @@ if (!$include_success) {
             
             <!-- Navigation Menu -->
             <ul class="nav flex-column">
-                
+                <li class="nav-item">
+                    <a class="nav-link" 
+                    href="../index.php">
+                        <i class="fas fa-user"></i> Home
+                    </a>
+                </li>
                 
                 <li class="nav-item">
                     <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'studentProfile.php') ? 'active' : ''; ?>" 
@@ -254,6 +259,11 @@ if (!$include_success) {
                     <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'myCourse.php') ? 'active' : ''; ?>" 
                     href="myCourse.php">
                         <i class="fas fa-book-open"></i> My Courses
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="myBooks.php">
+                        <i class="fas fa-book"></i> My Books
                     </a>
                 </li>
                 <li class="nav-item">

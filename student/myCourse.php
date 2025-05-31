@@ -122,6 +122,15 @@ $stuemail = $_SESSION['stuemail'] ?? '';
         color: white;
     }
     
+    .pending-btn {
+        display: inline-block;
+        background-color: #f6c23e;
+        color: #000;
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+    
     .no-courses {
         text-align: center;
         padding: 40px;
@@ -149,6 +158,25 @@ $stuemail = $_SESSION['stuemail'] ?? '';
         border-radius: 4px;
         margin-bottom: 20px;
     }
+    
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+    
+    .status-completed {
+        background-color: #d1fae5;
+        color: #1cc88a;
+    }
+    
+    .status-pending {
+        background-color: #f8e3da;
+        color: #e74a3b;
+    }
 </style>
 
 <div class="course-container">
@@ -162,7 +190,7 @@ $stuemail = $_SESSION['stuemail'] ?? '';
                     echo '<div class="error-message">Student email not found in session.</div>';
                 } else {
                     $sql = "SELECT co.order_id, c.course_id, c.course_name, c.course_duration, c.course_desc,
-                            c.course_img, c.course_author, c.course_original_price, c.course_price 
+                            c.course_img, c.course_author, c.course_original_price, c.course_price, co.status
                             FROM courseorder AS co 
                             JOIN course AS c ON c.course_id = co.course_id 
                             WHERE co.stuemail = ?";
@@ -176,6 +204,7 @@ $stuemail = $_SESSION['stuemail'] ?? '';
                         
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
+                                $status_class = ($row['status'] == 'completed') ? 'status-completed' : 'status-pending';
                                 ?>
                                 <div class="course-card">
                                     <div class="row">
@@ -186,6 +215,10 @@ $stuemail = $_SESSION['stuemail'] ?? '';
                                         </div>
                                         <div class="col-md-8">
                                             <div class="course-body">
+                                                <span class="status-badge <?php echo $status_class; ?>">
+                                                    <?php echo ucfirst(htmlspecialchars($row['status'])); ?>
+                                                </span>
+                                                
                                                 <h5 class="course-title"><?php echo htmlspecialchars($row['course_name']); ?></h5>
                                                 <p class="course-desc"><?php echo htmlspecialchars($row['course_desc']); ?></p>
                                                 
@@ -199,9 +232,15 @@ $stuemail = $_SESSION['stuemail'] ?? '';
                                                     <span class="current-price">Tsh <?php echo number_format($row['course_price']); ?></span>
                                                 </div>
                                                 
-                                                <a href="watchcourse.php?course_id=<?php echo $row['course_id']; ?>" class="watch-btn">
-                                                    <i class="fas fa-play-circle mr-2"></i> Watch Course
-                                                </a>
+                                                <?php if ($row['status'] == 'completed'): ?>
+                                                    <a href="watchcourse.php?course_id=<?php echo $row['course_id']; ?>" class="watch-btn">
+                                                        <i class="fas fa-play-circle mr-2"></i> Watch Course
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="pending-btn">
+                                                        <i class="fas fa-clock mr-2"></i> Pending Approval
+                                                    </span>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>

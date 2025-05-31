@@ -6,16 +6,31 @@ if (!isset($_SESSION)) {
 include("./admininclude/header.php");
 include("../dbconnection.php");
 
-// Check if database connection is successful
+// Check database connection
 if (!$conn) {
     die("<script>alert('Database connection failed: " . mysqli_connect_error() . "'); location.href='../index.php';</script>");
 }
 
-if (isset($_SESSION['is_admin_login'])) {
-    $adminEmail = $_SESSION['admin_email'];
-} else {
+// Admin authentication
+if (!isset($_SESSION['is_admin_login'])) {
     echo "<script> location.href='../index.php'; </script>";
     exit;
+}
+
+// Function to get proper image URL
+function getImageUrl($dbPath) {
+    if (empty($dbPath)) return false;
+    
+    // Remove any leading/trailing slashes or dots
+    $cleanPath = trim($dbPath, '/.');
+    
+    // Check if path already contains Uploads/Books
+    if (strpos($cleanPath, 'Uploads/Books/') === false) {
+        $cleanPath = 'Uploads/Books/' . $cleanPath;
+    }
+    
+    // Convert to web path
+    return '/online_learning_system/' . $cleanPath;
 }
 ?>
 
@@ -24,6 +39,7 @@ if (isset($_SESSION['is_admin_login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Management</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -86,6 +102,16 @@ if (isset($_SESSION['is_admin_login'])) {
         .department-filter {
             margin-bottom: 20px;
         }
+    .book-card { transition: transform 0.2s; margin-bottom: 1.5rem; }
+        .book-img { height: 200px; object-fit: cover; }
+        .broken-image { 
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -98,20 +124,16 @@ if (isset($_SESSION['is_admin_login'])) {
             </div>
             
             <!-- Department Filter -->
-            <div class="department-filter">
+            <div class="department-filter mb-3">
                 <select class="form-control" id="departmentFilter">
                     <option value="all">All Departments</option>
                     <option value="ICT">ICT</option>
                     <option value="Metrology">Metrology</option>
                     <option value="Business">Business Studies</option>
-                    <option value="Procurement">Procurement</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Accountancy">Accountancy</option>
-                    <option value="Business_Admin">Business Administration</option>
                 </select>
             </div>
             
-            <!-- Add Book Button -->
+            <!-- Action Buttons -->
             <div class="action-buttons mb-4">
                 <a href="addbook.php" class="btn btn-primary">
                     <i class="fas fa-plus-circle mr-2"></i>Add New Book
@@ -126,64 +148,67 @@ if (isset($_SESSION['is_admin_login'])) {
                 <?php
                 $sql = "SELECT b.*, c.course_name FROM books b LEFT JOIN course c ON b.course_id = c.course_id";
                 $result = $conn->query($sql);
-                $hasBooks = false;
                 
                 if ($result && $result->num_rows > 0) {
-                    $hasBooks = true;
                     while ($row = $result->fetch_assoc()) {
                         $badgeColor = [
                             'ICT' => 'primary',
                             'Metrology' => 'info',
-                            'Business' => 'success',
-                            'Procurement' => 'warning',
-                            'Marketing' => 'danger',
-                            'Accountancy' => 'secondary',
-                            'Business_Admin' => 'dark'
-                        ][$row['department']];
+                            'Business' => 'success'
+                        ][$row['department'] ?? 'secondary'];
+                        
+                        $imageUrl = getImageUrl($row['image_path']);
+                        $imageExists = $imageUrl && file_exists($_SERVER['DOCUMENT_ROOT'] . $imageUrl);
                         ?>
-                        <div class="col-md-4 mb-4 book-item" data-department="<?php echo htmlspecialchars($row['department']); ?>">
+                        <div class="col-md-4 mb-4 book-item" data-department="<?= htmlspecialchars($row['department']) ?>">
                             <div class="card book-card h-100">
-                                <?php if (!empty($row['image_path'])): ?>
-                                    <img src="../<?php echo htmlspecialchars($row['image_path']); ?>" class="card-img-top book-img" alt="Book Cover">
+                                <?php if ($imageUrl): ?>
+                                    <?php if ($imageExists): ?>
+                                        <img src="<?= $imageUrl ?>" class="card-img-top book-img" alt="Book Cover">
+                                    <?php else: ?>
+                                        <div class="broken-image">
+                                            <div class="text-center">
+                                                <i class="fas fa-image fa-3x mb-2"></i>
+                                                <p>Image not found</p>
+                                                <small><?= htmlspecialchars(basename($row['image_path'])) ?></small>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php else: ?>
-                                    <div class="book-img bg-light d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-book-open fa-3x text-muted"></i>
+                                    <div class="broken-image">
+                                        <i class="fas fa-book-open fa-3x"></i>
                                     </div>
                                 <?php endif; ?>
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($row['book_title']); ?></h5>
-                                    <div class="card-details">
-                                        <p class="card-text mb-1"><small class="text-muted">Author: <?php echo htmlspecialchars($row['author']); ?></small></p>
-                                        <p class="card-text mb-1"><small class="text-muted">ISBN: <?php echo !empty($row['isbn']) ? htmlspecialchars($row['isbn']) : 'N/A'; ?></small></p>
-                                        <?php if (!empty($row['course_name'])): ?>
-                                            <p class="card-text mb-1"><small class="text-muted">Course: <?php echo htmlspecialchars($row['course_name']); ?></small></p>
-                                        <?php endif; ?>
-                                        <p class="card-text price-tag">Tsh <?php echo number_format($row['price'], 0); ?></p>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <a href="viewbook.php?book_id=<?php echo htmlspecialchars($row['id']); ?>" 
-                                               class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-eye mr-1"></i> View/Edit
-                                            </a>
-                                            <span class="badge badge-<?php echo $badgeColor; ?> badge-department">
-                                                <?php echo str_replace('_', ' ', $row['department']); ?>
-                                            </span>
-                                        </div>
+                                
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= htmlspecialchars($row['book_title']) ?></h5>
+                                    <p class="card-text">Author: <?= htmlspecialchars($row['author']) ?></p>
+                                    <p class="card-text">ISBN: <?= !empty($row['isbn']) ? htmlspecialchars($row['isbn']) : 'N/A' ?></p>
+                                    <?php if (!empty($row['course_name'])): ?>
+                                        <p class="card-text">Course: <?= htmlspecialchars($row['course_name']) ?></p>
+                                    <?php endif; ?>
+                                    <p class="price-tag">Tsh <?= number_format($row['price'], 0) ?></p>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="viewbook.php?book_id=<?= $row['id'] ?>" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye mr-1"></i> View/Edit
+                                        </a>
+                                        <span class="badge badge-<?= $badgeColor ?>">
+                                            <?= str_replace('_', ' ', $row['department']) ?>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <?php
                     }
-                }
-                
-                if (!$hasBooks) {
+                } else {
                     echo '<div class="col-12 empty-state">
-                            <i class="fas fa-book-open"></i>
+                            <i class="fas fa-book-open fa-3x mb-3"></i>
                             <h4>No Books Found</h4>
-                            <p>There are currently no books in the library. Add some books to get started.</p>
-                            <a href="addbook.php" class="btn btn-primary">
+                            <p>There are currently no books in the library.</p>
+                            <a href="addbook.php" class="btn btn-primary mt-2">
                                 <i class="fas fa-plus-circle mr-2"></i>Add First Book
                             </a>
                           </div>';
@@ -194,29 +219,26 @@ if (isset($_SESSION['is_admin_login'])) {
     </div>
 </div>
 
-<!-- JavaScript Dependencies -->
+<!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Department filter functionality
-        $('#departmentFilter').change(function() {
-            const department = $(this).val();
-            
-            if (department === 'all') {
-                $('.book-item').show();
-            } else {
-                $('.book-item').hide();
-                $(`.book-item[data-department="${department}"]`).show();
-            }
-        });
-        
-        // Refresh button functionality
-        $('#refreshBtn').click(function() {
-            location.reload();
-        });
+$(document).ready(function() {
+    // Department filter
+    $('#departmentFilter').change(function() {
+        const department = $(this).val();
+        $('.book-item').hide();
+        if (department === 'all') {
+            $('.book-item').show();
+        } else {
+            $(`.book-item[data-department="${department}"]`).show();
+        }
     });
+    
+    // Refresh button
+    $('#refreshBtn').click(function() {
+        location.reload();
+    });
+});
 </script>
 
 <?php
