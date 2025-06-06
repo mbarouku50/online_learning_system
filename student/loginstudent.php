@@ -18,10 +18,12 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkLogStemail'])) {
         // Include database connection
         require_once(__DIR__ . '/../dbconnection.php');
+        log_action('login_attempt', $_POST['stuemail'] ?? 'unknown', 'Login process started');
         
         // Validate required fields
         if (empty($_POST['stuemail']) || empty($_POST['stupass'])) {
             $response["message"] = "Email and password are required";
+             log_action('validation_error', $_POST['stuemail'] ?? 'unknown', 'Missing email or password');
             echo json_encode($response);
             exit();
         }
@@ -47,6 +49,7 @@ try {
         
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
+            log_action('debug', $stuemail, 'User found in database');
             
             // Verify password
             if (password_verify($password, $row['stupass'])) {
@@ -57,6 +60,7 @@ try {
                 $_SESSION['is_login'] = true;
                 $_SESSION['stud_id'] = $row['stud_id'];
                 $_SESSION['stuemail'] = $row['stuemail'];
+                log_action('login_success', $stuemail, 'User logged in successfully');
                 
                 $response = [
                     "status" => "success", 
@@ -65,9 +69,11 @@ try {
                 ];
             } else {
                 $response["message"] = "Invalid email or password";
+                log_action('login_failed', $stuemail, 'Invalid password provided');
             }
         } else {
             $response["message"] = "Invalid email or password";
+            log_action('login_failed', $stuemail, 'Email not found in database');
         }
         
         $stmt->close();
@@ -76,6 +82,7 @@ try {
 } catch (Exception $e) {
     $response["message"] = "Server error: " . $e->getMessage();
     error_log("Login error: " . $e->getMessage());
+    log_action('system_error', $stuemail ?? 'unknown', 'Exception: ' . $e->getMessage());
 }
 
 // Send JSON response

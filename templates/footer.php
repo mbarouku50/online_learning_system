@@ -135,7 +135,7 @@
                     </div>
                     <div class="form-group">
                         <i class="fas fa-id-card"></i>
-                        <label for="studreg" class="form-label">Registration Number</label>
+                        <label for="studreg" class="form-label">username</label>
                         <input type="text" class="form-control" placeholder="Enter your registration number" name="studreg" id="studreg" required>
                     </div>
                     <div class="form-group">

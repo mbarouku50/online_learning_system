@@ -17,6 +17,34 @@ if (!isset($_SESSION['is_admin_login'])) {
     exit;
 }
 
+// Handle delete request
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    
+    // First, get the image path to delete the file
+    $sql = "SELECT image_path FROM books WHERE id = '$delete_id'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $image_path = $row['image_path'];
+    
+    // Delete the book record
+    $sql = "DELETE FROM books WHERE id = '$delete_id'";
+    if ($conn->query($sql) === TRUE) {
+        // If book was deleted successfully, delete the associated image file
+        if (!empty($image_path)) {
+            $full_path = $_SERVER['DOCUMENT_ROOT'] . getImageUrl($image_path);
+            if (file_exists($full_path)) {
+                unlink($full_path);
+            }
+        }
+        echo "<script>alert('Book deleted successfully');</script>";
+    } else {
+        echo "<script>alert('Error deleting book: " . $conn->error . "');</script>";
+    }
+    echo "<script>location.href='books.php';</script>";
+    exit;
+}
+
 // Function to get proper image URL
 function getImageUrl($dbPath) {
     if (empty($dbPath)) return false;
@@ -102,7 +130,7 @@ function getImageUrl($dbPath) {
         .department-filter {
             margin-bottom: 20px;
         }
-    .book-card { transition: transform 0.2s; margin-bottom: 1.5rem; }
+        .book-card { transition: transform 0.2s; margin-bottom: 1.5rem; }
         .book-img { height: 200px; object-fit: cover; }
         .broken-image { 
             background-color: #f8f9fa;
@@ -111,6 +139,13 @@ function getImageUrl($dbPath) {
             justify-content: center;
             height: 200px;
             color: #6c757d;
+        }
+        .card-footer-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            background-color: rgba(0,0,0,0.03);
+            border-top: 1px solid rgba(0,0,0,0.125);
         }
     </style>
 </head>
@@ -190,14 +225,22 @@ function getImageUrl($dbPath) {
                                     <p class="price-tag">Tsh <?= number_format($row['price'], 0) ?></p>
                                     
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <a href="viewbook.php?book_id=<?= $row['id'] ?>" 
-                                           class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-eye mr-1"></i> View/Edit
-                                        </a>
                                         <span class="badge badge-<?= $badgeColor ?>">
                                             <?= str_replace('_', ' ', $row['department']) ?>
                                         </span>
                                     </div>
+                                </div>
+                                
+                                <div class="card-footer-buttons">
+                                    <a href="viewbook.php?book_id=<?= $row['id'] ?>" 
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye mr-1"></i> View/Edit
+                                    </a>
+                                    <button class="btn btn-sm btn-outline-danger delete-book" 
+                                            data-id="<?= $row['id'] ?>" 
+                                            data-title="<?= htmlspecialchars($row['book_title']) ?>">
+                                        <i class="fas fa-trash-alt mr-1"></i> Delete
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -221,6 +264,7 @@ function getImageUrl($dbPath) {
 
 <!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 $(document).ready(function() {
     // Department filter
@@ -237,6 +281,26 @@ $(document).ready(function() {
     // Refresh button
     $('#refreshBtn').click(function() {
         location.reload();
+    });
+    
+    // Delete book confirmation
+    $('.delete-book').click(function() {
+        const bookId = $(this).data('id');
+        const bookTitle = $(this).data('title');
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `You are about to delete "${bookTitle}". This action cannot be undone!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `books.php?delete_id=${bookId}`;
+            }
+        });
     });
 });
 </script>

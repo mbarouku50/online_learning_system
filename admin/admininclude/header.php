@@ -15,6 +15,10 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <!-- custom css -->
     <link rel="stylesheet" href="../css/adminstyle1.css">
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>

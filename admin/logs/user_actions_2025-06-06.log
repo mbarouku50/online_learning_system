@@ -1,0 +1,4 @@
+[2025-06-06 09:30:48] User: mbarouk@gmail.com | Action: login_success | Details: Admin logged in
+[2025-06-06 10:54:09] User: mbarouk@gmail.com | Action: login_failed | Details: Invalid password
+[2025-06-06 10:54:15] User: mbarouk@gmail.com | Action: login_success | Details: Admin logged in
+[2025-06-06 11:15:20] User: mbarouk@gmail.com | Action: login_success | Details: Admin logged in

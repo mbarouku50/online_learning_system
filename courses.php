@@ -16,7 +16,7 @@ include("./templates/header.php");
     /* Course Banner */
     .course-banner {
         position: relative;
-        height: 400px;
+        height: 250px;
         overflow: hidden;
         background: var(--dark-color);
     }
@@ -35,7 +35,7 @@ include("./templates/header.php");
 
     .course-banner-content {
         position: absolute;
-        top: 50%;
+        top: 80%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;

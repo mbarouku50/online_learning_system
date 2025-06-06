@@ -12,5 +12,19 @@ if($conn->connect_error){
     die("connection failed");
 }
 
+function log_action($action, $username, $details = "") {
+    $log_file = 'logs/user_actions_' . date('Y-m-d') . '.log';
+    $timestamp = date('Y-m-d H:i:s');
+    $log_entry = "[$timestamp] User: $username | Action: $action | Details: $details\n";
+    
+    // Create logs directory if it doesn't exist
+    if (!file_exists('logs')) {
+        mkdir('logs', 0777, true);
+    }
+    
+    // Write to log file
+    file_put_contents($log_file, $log_entry, FILE_APPEND);
+}
+
 
 ?>

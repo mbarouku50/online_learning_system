@@ -1,0 +1,20 @@
+[2025-06-05 10:08:45] User: system | Action: debug | Details: Processing registration for: Johson (johson@gmail.com)
+[2025-06-05 10:08:46] User: johson@gmail.com | Action: registration_success | Details: New student registered (ID: 12)
+[2025-06-05 10:20:14] User: johson@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-05 10:20:14] User: johson@gmail.com | Action: debug | Details: User found in database
+[2025-06-05 10:20:14] User: johson@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-05 10:32:36] User: mbarukhemedy50@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-05 10:32:36] User: mbarukhemedy50@gmail.com | Action: debug | Details: User found in database
+[2025-06-05 10:32:36] User: mbarukhemedy50@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-05 14:00:44] User: mbarukhemedy50@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-05 14:00:44] User: mbarukhemedy50@gmail.com | Action: debug | Details: User found in database
+[2025-06-05 14:00:44] User: mbarukhemedy50@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-05 14:23:28] User: mbarukhemedy50@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-05 14:23:28] User: mbarukhemedy50@gmail.com | Action: debug | Details: User found in database
+[2025-06-05 14:23:29] User: mbarukhemedy50@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-05 15:04:32] User: mbarukhemedy50@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-05 15:04:32] User: mbarukhemedy50@gmail.com | Action: debug | Details: User found in database
+[2025-06-05 15:04:33] User: mbarukhemedy50@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-05 17:15:04] User: mbarukhemedy50@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-05 17:15:04] User: mbarukhemedy50@gmail.com | Action: debug | Details: User found in database
+[2025-06-05 17:15:04] User: mbarukhemedy50@gmail.com | Action: login_success | Details: User logged in successfully

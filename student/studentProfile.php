@@ -59,7 +59,7 @@ if (isset($_POST["updateStuNameBtn"])) {
         // Handle file upload if a new image was provided
         if (!empty($_FILES['stu_img']['name']) && $_FILES['stu_img']['error'] === UPLOAD_ERR_OK) {
             $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-            $max_size = 5 * 1024 * 1024; // 5MB
+            $max_size = 8 * 1024 * 1024; // 8MB
             
             // Sanitize filename
             $original_name = $_FILES['stu_img']['name'];

@@ -6,7 +6,7 @@ include("./dbconnection.php");
     /* Video Background */
     .vid-parent {
         position: relative;
-        height: 70vh;
+        height: 60vh;
         overflow: hidden;
     }
     
@@ -420,7 +420,7 @@ include("./dbconnection.php");
                 </a>
             </div>
             <div class="col-6 col-md-3">
-                <a class="text-white social-hover" href="#">
+                <a class="text-white social-hover" href="https://wa.me/255627841861">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
             </div>

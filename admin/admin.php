@@ -40,16 +40,23 @@ try {
                 $_SESSION['is_admin_login'] = true;
                 $_SESSION['admin_id'] = $row['admin_id'];
                 $_SESSION['admin_email'] = $row['admin_email'];
-                
+
+                // Log successful login
+                log_action('login_success', $row['admin_email'], 'Admin logged in');
+
                 $response = [
                     "status" => "success", 
                     "message" => "Login successful",
                     "redirect" => "admin/adminDashboard.php"
                 ];
             } else {
+                // Log failed login attempt
+                log_action('login_failed', $admin_email, 'Invalid password');
                 $response["message"] = "Invalid password";
             }
         } else {
+            // Log account not found
+            log_action('login_failed', $admin_email, 'Account not found');
             $response["message"] = "Account not found";
         }
         
@@ -57,6 +64,8 @@ try {
         $conn->close();
     }
 } catch (Exception $e) {
+    // Log server errors
+    log_action('server_error', isset($admin_email) ? $admin_email : 'unknown', $e->getMessage());
     $response["message"] = "Server error: " . $e->getMessage();
 }
 

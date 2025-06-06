@@ -1,3 +1,0 @@
-2025-05-11 22:14:06 - Got price from SESSION: 20000
-2025-05-11 22:14:10 - Got price from SESSION: 20000
-2025-05-11 22:14:10 - Error: Incorrect date value: '2025' for column `03.2481.01.01.2023`.`courseorder`.`order_date` at row 1

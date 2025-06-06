@@ -1,0 +1,12 @@
+[2025-06-06 09:30:17] User: mbarukhemedy50@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-06 09:30:17] User: mbarukhemedy50@gmail.com | Action: debug | Details: User found in database
+[2025-06-06 09:30:17] User: mbarukhemedy50@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-06 10:48:41] User: mbarukhemedy50@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-06 10:48:41] User: mbarukhemedy50@gmail.com | Action: debug | Details: User found in database
+[2025-06-06 10:48:41] User: mbarukhemedy50@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-06 10:49:43] User: xhidy@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-06 10:49:43] User: xhidy@gmail.com | Action: debug | Details: User found in database
+[2025-06-06 10:49:43] User: xhidy@gmail.com | Action: login_success | Details: User logged in successfully
+[2025-06-06 11:00:29] User: xhidy@gmail.com | Action: login_attempt | Details: Login process started
+[2025-06-06 11:00:29] User: xhidy@gmail.com | Action: debug | Details: User found in database
+[2025-06-06 11:00:30] User: xhidy@gmail.com | Action: login_success | Details: User logged in successfully

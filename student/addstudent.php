@@ -59,6 +59,8 @@ try {
     $stuemail = $conn->real_escape_string(trim($_POST['stuemail']));
     $stupass = $_POST['stupass'];
 
+    log_action('debug', 'system', "Processing registration for: $studname ($stuemail)");
+
     // Validate email
     if (!filter_var($stuemail, FILTER_VALIDATE_EMAIL)) {
         throw new Exception('Invalid email format');
@@ -83,17 +85,22 @@ try {
     $stmt->bind_param('ssss', $studname, $studreg, $stuemail, $hashedPass);
 
     if ($stmt->execute()) {
+        $newStudentId = $conn->insert_id;
+        log_action('registration_success', $stuemail, "New student registered (ID: $newStudentId)");
         ob_end_clean();
         echo json_encode([
             'status' => 'success',
             'message' => 'Registration successful! You can now login.'
+
         ]);
     } else {
+        log_action('database_error', $stuemail, $errorMsg);
         throw new Exception('Registration failed: ' . $stmt->error);
     }
 
     $stmt->close();
 } catch (Exception $e) {
+     log_action('error', isset($stuemail) ? $stuemail : 'unknown', $e->getMessage());
     ob_end_clean();
     echo json_encode([
         'status' => 'error',

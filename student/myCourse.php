@@ -107,18 +107,60 @@ $stuemail = $_SESSION['stuemail'] ?? '';
         font-size: 1.2rem;
     }
     
-    .watch-btn {
+    .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .btn {
         display: inline-block;
-        background-color: #4e73df;
-        color: white;
         padding: 8px 20px;
         border-radius: 4px;
         text-decoration: none;
-        transition: background-color 0.3s;
+        transition: all 0.3s;
+        font-weight: 500;
+        border: none;
+    }
+    
+    .watch-btn {
+        background-color: #4e73df;
+        color: white;
     }
     
     .watch-btn:hover {
         background-color: #2e59d9;
+        color: white;
+    }
+    
+    .assignment-btn {
+        background-color: #1cc88a;
+        color: white;
+    }
+    
+    .assignment-btn:hover {
+        background-color: #17a673;
+        color: white;
+    }
+    
+    .quiz-btn {
+        background-color: #f6c23e;
+        color: #000;
+    }
+    
+    .quiz-btn:hover {
+        background-color: #dda20a;
+        color: #000;
+    }
+    
+    .exam-btn {
+        background-color: #e74a3b;
+        color: white;
+    }
+    
+    .exam-btn:hover {
+        background-color: #be2617;
         color: white;
     }
     
@@ -233,9 +275,20 @@ $stuemail = $_SESSION['stuemail'] ?? '';
                                                 </div>
                                                 
                                                 <?php if ($row['status'] == 'completed'): ?>
-                                                    <a href="watchcourse.php?course_id=<?php echo $row['course_id']; ?>" class="watch-btn">
-                                                        <i class="fas fa-play-circle mr-2"></i> Watch Course
-                                                    </a>
+                                                    <div class="action-buttons">
+                                                        <a href="watchcourse.php?course_id=<?php echo $row['course_id']; ?>" class="btn watch-btn">
+                                                            <i class="fas fa-play-circle mr-2"></i> Watch Course
+                                                        </a>
+                                                        <a href="assignments.php?course_id=<?php echo $row['course_id']; ?>" class="btn assignment-btn">
+                                                            <i class="fas fa-tasks mr-2"></i> Assignments
+                                                        </a>
+                                                        <a href="quizzes.php?course_id=<?php echo $row['course_id']; ?>" class="btn quiz-btn">
+                                                            <i class="fas fa-question-circle mr-2"></i> Quizzes
+                                                        </a>
+                                                        <a href="exams.php?course_id=<?php echo $row['course_id']; ?>" class="btn exam-btn">
+                                                            <i class="fas fa-file-alt mr-2"></i> Exams
+                                                        </a>
+                                                    </div>
                                                 <?php else: ?>
                                                     <span class="pending-btn">
                                                         <i class="fas fa-clock mr-2"></i> Pending Approval
